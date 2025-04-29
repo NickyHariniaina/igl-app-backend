@@ -2,7 +2,6 @@ import express, { json } from "express";
 import { config } from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
-import bcrypt from "bcryptjs";
 import cors from "cors";
 import { createTable } from "./db/utils/createTable.js";
 
@@ -21,9 +20,9 @@ app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
 
-app.use("/personality", personalityRoutes);
-app.use("/user", userRoutes);
-app.use("/auth", authRoutes);
+app.use("/api/personality", personalityRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/auth", authRoutes);
 
 createTable().then(() => {
     app.listen(PORT, () => {

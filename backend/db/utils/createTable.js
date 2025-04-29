@@ -16,8 +16,8 @@ export const createTable = async () => {
                 "id_user" int not null references "user"("id_user"),
                 "favorite_color" varchar(250) default 'autre',
                 "colorscheme" varchar(250) default 'dark',
-                "isExtrovert" boolean default false,
-                "isSingle" boolean default false,
+                "is_extrovert" boolean default false,
+                "is_single" boolean default false,
                 "language" varchar(3) check ("language" in ('fr', 'mg', 'eng')),
                 "hair_length" varchar(250) check("hair_length" in ('short', 'long', 'medium')),
                 "attracted_by" varchar(250) check("attracted_by" in ('F', 'M', 'B'))

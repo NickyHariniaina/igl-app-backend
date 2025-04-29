@@ -4,10 +4,6 @@ export const getUsersQuery = () => {
     return sql.query(`SELECT * from "user";`);
 }
 
-export const getCurrentUsers = (username) => {
-    return sql.query(`SELECT * FROM "user" WHERE "username" = $1`, [username])
-}
-
 export const updateUsernameQuery = (username, idUser) => {
     return sql.query(`
         UPDATE "user"

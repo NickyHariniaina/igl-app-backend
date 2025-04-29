@@ -1,4 +1,4 @@
-import { getUsersQuery, updateUsernameQuery, updatePasswordQuery, updateProfilPictureQuery, getUserQuery, deleteUserQuery, getCurrentUsers } from "../db/utils/userQuery.js";
+import { getUsersQuery, updateUsernameQuery, updatePasswordQuery, updateProfilPictureQuery, getUserQuery, deleteUserQuery} from "../db/utils/userQuery.js";
 import bcrypt from "bcryptjs";
 
 export const getUsers = async (req, res) => {
@@ -16,9 +16,7 @@ export const getUsers = async (req, res) => {
 export const updateUsername = async (req, res) => {
     try {
         const { newUsername } = req.body;
-        const username = req.user.username;
-        const userData = await getCurrentUsers(username);
-        const idUser = userData.rows[0].id_user;
+        const idUser = req.user.idUser;
         await updateUsernameQuery(newUsername, idUser);
         console.log("Username updated succesfully.");
         res.status(202).json({
@@ -37,9 +35,7 @@ export const updateUsername = async (req, res) => {
 export const updatePassword = async (req, res) => {
     try {
         const { password } = req.body;
-        const username = req.user.username;
-        const userData = await getCurrentUsers(username);
-        const idUser = userData.rows[0].id_user;
+        const idUser = req.user.idUser;
         const hashedPassword = await bcrypt.hash(password, 10);
         await updatePasswordQuery(hashedPassword, idUser);
         res.status(202).json({
@@ -57,9 +53,7 @@ export const updatePassword = async (req, res) => {
 export const updateProfilPicture = async (req, res) => {
     try {
         const { profil_picture } = req.body;
-        const username = req.user.username;
-        const userData = await getCurrentUsers(username);
-        const idUser = userData.rows[0].id_user;
+        const idUser = req.user.idUser;
         await updateProfilPictureQuery(profil_picture, idUser);
         res.status(202).json({
             succecs: true,
@@ -75,9 +69,7 @@ export const updateProfilPicture = async (req, res) => {
 }
 export const getUser = async (req, res) => {
     try {
-        const username = req.user.username;
-        const userData = await getCurrentUsers(username);
-        const idUser = userData.rows[0].id_user;
+        const idUser = req.user.idUser;
         const currentUser = await getUserQuery(idUser);
         res.status(200).json({
             success: true,
@@ -94,9 +86,7 @@ export const getUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
     try {
-        const username = req.user.username;
-        const userData = await getCurrentUsers(username);
-        const idUser = userData.rows[0].id_user;
+        const idUser = req.user.idUser;
         await deleteUserQuery(idUser);
         res.status(200).json({
             success: true,

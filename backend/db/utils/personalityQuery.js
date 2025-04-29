@@ -1,7 +1,11 @@
 import { sql } from "../../config/db.js";
 
-export const getPersonalityQuery = (userId) => {
-    return sql.query(`select * from "personality" where "id_user" = $1;`, [userId])
+export const getPersonalityQuery = (idUser) => {
+    return sql.query(`select * from "personality" where "id_user" = $1;`, [idUser])
+}
+
+export const createPersonalityForCreatedUser = (idUser) => {
+    return sql.query(`insert into "personality" ("id_user") values ($1);`, [idUser]);
 }
 
 export const updateFavoriteColorQuery = (favoriteColor, idUser) => {
@@ -16,7 +20,7 @@ export const updateColorschemeQuery = (colorscheme, idUser) => {
     return sql.query(
         `update "personality"
         set "colorscheme" = $1
-        where "id_user" = $2;`
+        where "id_user" = $2 returning *;`
     , [colorscheme, idUser]);
 }
 
@@ -40,7 +44,7 @@ export const updateLanguageQuery = (language, idUser) => {
     return sql.query(
         `update "personality"
         set "language" = $1
-        where "id_user" = $2;`
+        where "id_user" = $2 returning *;`
     , [language, idUser]);
 }
 

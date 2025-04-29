@@ -15,6 +15,7 @@ export const authenticateUser = (req, res, next) => {
             const decoded = jwt.verify(token, process.env.SECRET_KEY);
             // Data a utiliser au lieu d'utiliser "req" lors des requettes.
             req.user = decoded;
+            console.log(req.user);
             next();
         } catch (error) {
             console.error(error);

@@ -1,4 +1,5 @@
 import bcrypt from "bcryptjs";
+import { createPersonalityForCreatedUser } from "../db/utils/personalityQuery.js";
 import { createAccountQuery } from "../db/utils/createAccount.js";
 import { generateToken } from "../utils/tokenGenerator.js";
 import { getUsersQuery } from "../db/utils/userQuery.js";
@@ -12,8 +13,10 @@ export const createAccount = async (req, res) => {
         const accountCreated = await createAccountQuery(username, hashedPassword, sexe);
 
         const idUser = accountCreated.rows[0].id_user;
+        console.log(idUser);
+        await createPersonalityForCreatedUser(idUser);
 
-        const [accessToken, refreshToken] = generateToken(idUser, username);
+        const [accessToken, refreshToken] = generateToken(idUser);
 
         res.status(201).json({
             success: true,
@@ -51,8 +54,8 @@ export const login = async (req, res) => {
             });
         }
 
-        const [accessToken, refreshToken] = generateToken(userData.userId, username);
-
+        const [accessToken, refreshToken] = generateToken(userData.id_user);
+        console.log(userData);
         res.status(200).json({
             success: true,
             message: "Welcome",
