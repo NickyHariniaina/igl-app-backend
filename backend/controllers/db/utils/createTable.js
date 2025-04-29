@@ -28,7 +28,7 @@ export const createTable = async () => {
                 "sender_username" varchar(200) default '~whoami',
                 "content" text not null,
                 "hint" varchar(250),
-                "sent_at" timestamp default current_timestamp::timestamp(0 ),
+                "sent_at" timestamp default current_date,
                 "privacy" varchar(250) default 'private' check ("privacy" in ('public', 'private'))
             );
         `);

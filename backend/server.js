@@ -8,7 +8,7 @@ import { createTable } from "./db/utils/createTable.js";
 import userRoutes from "./routes/userRoutes.js";
 import personalityRoutes from "./routes/personalityRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
-
+import messageRoutes from "./routes/messageRoutes.js";
 config();
 
 const PORT = process.env.PORT;
@@ -23,6 +23,7 @@ app.use(morgan("dev"));
 app.use("/api/personality", personalityRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/message", messageRoutes);
 
 createTable().then(() => {
     app.listen(PORT, () => {

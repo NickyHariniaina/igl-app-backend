@@ -22,12 +22,13 @@ CREATE TABLE IF NOT EXISTS "personality" (
 
 CREATE TABLE IF NOT EXISTS "message" (
     "id_message" serial primary key,
-    "id_sender" int not null references "user"("id_user"),
-    "id_receiver" int not null check (id_receiver != id_sender) references "user"("id_user"),
+    "id_receiver" int not null check references "user"("id_user"),
+    "receiver_username" varchar(200) not null,
+    "sender_username" varchar(200) default '~whoami',
     "content" text not null,
     "hint" varchar(250),
     "sent_at" timestamp default current_date,
-    "privacy" varchar(250) check ("privacy" in ('public', 'private'))
+    "privacy" varchar(250) default 'private' check ("privacy" in ('public', 'private'))
 );
 
 CREATE TABLE IF NOT EXISTS "follower" (
