@@ -12,7 +12,7 @@ import morgan from "morgan";
 config();
 
 // Use the 5050 PORT just in case there isn't a .env file.
-const PORT = process.env.PORT || 5050;
+const PORT = process.env.PORT;
 const app = express();
 
 app.use(json());
