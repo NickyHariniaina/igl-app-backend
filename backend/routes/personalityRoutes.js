@@ -4,8 +4,10 @@ import { authenticateUser } from "../utils/authenticateUser.js";
 
 const router = Router();
 
-// Current user's own data.
+// Route for getting user's personality.
 router.get("/me", authenticateUser, getPersonality);
+
+// Route for updating user's personality.
 router.put("/me/favorite_color", authenticateUser, updateFavoriteColor);
 router.put("/me/colorscheme", authenticateUser, updateColorScheme);
 router.put("/me/is_extrovert", authenticateUser, updateIsExtrovert);
@@ -14,5 +16,4 @@ router.put("/me/language", authenticateUser, updateLanguage);
 router.put("/me/hair_length", authenticateUser, updateHairLength);
 router.put("/me/attracted_by", authenticateUser, updateAttractedBy);
 
-// Other user's data. if they are not private TODO: Add that later.
 export default router;

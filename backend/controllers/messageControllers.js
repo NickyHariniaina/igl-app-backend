@@ -1,6 +1,10 @@
 import { getMessagesQuery, getMessageQuery, sendMessageQuery } from "../db/utils/message.js";
 import { getUsersQuery } from "../db/utils/userQuery.js";
 
+// These controllers are easy to maintain.
+// They have the same structure, just depends on the query method.
+// All the log in this files are used in case you got error using any controllers.
+
 export const getMessages = async (req, res) => {
     try {
         const { username } = req.user;
@@ -34,7 +38,7 @@ export const sendMessage = async (req, res) => {
     try {
         const { receiverUsername, senderUsername, content, hint, privacy } = req.body;
         const users = await getUsersQuery();
-        if (!(users.rows.some(user => user.username === receiverU))) {
+        if (!(users.rows.some(user => user.username === receiverUsername))) {
             return res.status(400).json({
                 success: false,
                 message: "This username doesn't exist"

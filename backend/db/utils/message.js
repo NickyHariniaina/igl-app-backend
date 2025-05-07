@@ -1,7 +1,7 @@
 import { sql } from "../../config/db.js";
 
 export const getMessagesQuery = (idReceiver) => {
-    return sql.query(`SELECT "content" from "message" where "receiver_username" = $1;`, [idReceiver]);
+    return sql.query(`SELECT * from "message" where "receiver_username" = $1;`, [idReceiver]);
 }
 
 export const getMessageQuery = (idMessage, idUser) => {

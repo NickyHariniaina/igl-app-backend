@@ -1,5 +1,8 @@
 import { sql } from "../../config/db.js";
 
+// Used in the server.js to create every table at the first deployment of the app.
+// The app depends on this.
+
 export const createTable = async () => {
     try {
         const dbInit = await sql.query(`

@@ -1,5 +1,13 @@
 import { getPersonalityQuery, updateAttractedByQuery, updateColorschemeQuery, updateFavoriteColorQuery, updateHairLengthQuery, updateIsExtrovertQuery, updateIsSingleQuery, updateLanguageQuery } from "../db/utils/personalityQuery.js";
 
+// These controllers are easy to maintain.
+// They have the same structure, just depends on the query method.
+// All the log in this files are used in case you got error using any controllers.
+
+// Feel free to change the error message, i just forgot to change it
+// The fun fact is that, I didn't use it in the frontend, 
+// so it don't really bother if it is changed or not.
+
 export const getPersonality = async (req, res) => {
     try {
         const idUser = req.user.idUser;
@@ -31,6 +39,7 @@ export const updateFavoriteColor = async (req, res) => {
         res.status(404).json({ message: "An error occurred" });
     }
 }
+
 export const updateColorScheme = async (req, res) => {
     try {
         const idUser = req.user.idUser;
@@ -46,6 +55,7 @@ export const updateColorScheme = async (req, res) => {
         res.status(404).json({ message: "An error occurred" });
     }
 }
+
 export const updateIsExtrovert = async (req, res) => {
     try {
         const { isExtrovert } = req.body;
@@ -75,6 +85,7 @@ export const updateIsSingle = async (req, res) => {
         res.status(404).json({ message: "An error occurred" });
     }
 }
+
 export const updateLanguage = async (req, res) => {
     try {
         const idUser = req.user.idUser;
@@ -90,6 +101,7 @@ export const updateLanguage = async (req, res) => {
         res.status(404).json({ message: "An error occurred" });
     }
 }
+
 export const updateHairLength = async (req, res) => {
     try {
         const idUser = req.user.idUser;
@@ -104,6 +116,7 @@ export const updateHairLength = async (req, res) => {
         res.status(404).json({ message: "An error occurred" });
     }
 }
+
 export const updateAttractedBy = async (req, res) => {
     try {
         const { attractedBy } = req.body;
