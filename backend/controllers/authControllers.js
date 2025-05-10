@@ -10,7 +10,7 @@ import { getUsersQuery } from "../db/utils/userQuery.js";
 
 export const createAccount = async (req, res) => {
     try {
-        const {username, password, sexe} = req.body;
+        const { username, password, sexe } = req.body;
         const users = await getUsersQuery();
         if (users.rows.some(user => user.username === username)) {
             return res.status(400).json({
@@ -18,12 +18,12 @@ export const createAccount = async (req, res) => {
                 message: "This username already exists"
             })
         }
-        
+
         const hashedPassword = await bcrypt.hash(password, 10);
         const accountCreated = await createAccountQuery(username, hashedPassword, sexe);
         const idUser = accountCreated.rows[0].id_user;
         await createPersonalityForCreatedUser(idUser);
-        
+
         const [accessToken, refreshToken] = generateToken(idUser, username);
         res.status(201).json({
             success: true,

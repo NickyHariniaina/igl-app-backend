@@ -74,18 +74,23 @@ export const updateProfilPicture = async (req, res) => {
         const { profil_picture } = req.body;
         const idUser = req.user.idUser;
         await updateProfilPictureQuery(profil_picture, idUser);
-        res.status(202).json({
+        res.status(200).json({
             succecs: true,
             message: "Profil picture updated succesfully"
         })
     } catch (error) {
-        console.log("Profil picture not changed, too weak", error);
+        console.log("Profil picture not changed", error);
         res.status(404).json({
             success: false,
             message: "Profil picture not changed"
         })
     }
 }
+
+
+// -----------------------------------------
+// This controllers is not really used in the front, i don't know why.
+
 export const getUser = async (req, res) => {
     try {
         const idUser = req.user.idUser;
