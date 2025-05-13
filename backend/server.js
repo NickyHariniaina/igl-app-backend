@@ -1,13 +1,13 @@
-import express, { json } from "express";
-import { config } from "dotenv";
-import { createTable } from "./db/utils/createTable.js";
-import userRoutes from "./routes/userRoutes.js";
-import personalityRoutes from "./routes/personalityRoutes.js";
-import authRoutes from "./routes/authRoutes.js";
-import messageRoutes from "./routes/messageRoutes.js";
 import cors from "cors";
+import { config } from "dotenv";
+import express, { json } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
+import { createTable } from "./db/utils/createTable.js";
+import authRoutes from "./routes/authRoutes.js";
+import messageRoutes from "./routes/messageRoutes.js";
+import personalityRoutes from "./routes/personalityRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 config();
 
@@ -19,11 +19,10 @@ app.use(json());
 app.use(cors(
     {
         origin: "*",
-        methods: ["GET", "POST", "PUT", "DELETE"],
-        allowedHeaders: ["Content-Type", "Authorization"],
         credentials: true,
     })
 );
+
 app.use(helmet());
 app.use(morgan("dev"));
 
