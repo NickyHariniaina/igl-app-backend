@@ -1,6 +1,6 @@
-import { sql } from "../config/db.js";
-import { getUsersQuery, updateUsernameQuery, updatePasswordQuery, updateProfilPictureQuery, getUserQuery, deleteUserQuery} from "../db/utils/userQuery.js";
 import bcrypt from "bcryptjs";
+import { sql } from "../config/db.js";
+import { deleteUserQuery, getUserQuery, getUsersQuery, updatePasswordQuery, updateProfilPictureQuery, updateUsernameQuery } from "../db/utils/userQuery.js";
 
 // These controllers are easy to maintain.
 // They have the same structure, just depends on the query method.
@@ -53,9 +53,19 @@ export const updateUsername = async (req, res) => {
 
 export const updatePassword = async (req, res) => {
     try {
-        const { password } = req.body;
+        const { password, oldPassword } = req.body;
+        console.log(req.body);
         const idUser = req.user.idUser;
         const hashedPassword = await bcrypt.hash(password, 10);
+        const userData = await getUserQuery(idUser);
+        const currentPassword = userData.rows[0].password_hashed;
+        const passwordIsMatched = await bcrypt.compare(oldPassword, currentPassword);
+        if (!passwordIsMatched) {
+            throw new Error("Your password is wrong.");
+        }
+        if (password === oldPassword) {
+            throw new Error("Your password cannot be the same as before.");
+        }
         await updatePasswordQuery(hashedPassword, idUser);
         res.status(202).json({
             success: true,
@@ -65,10 +75,12 @@ export const updatePassword = async (req, res) => {
         console.log("Password not changed, too weak", error);
         res.status(404).json({
             success: false,
-            message: "Password not changed"
+            message: "There is an errror. Not specified...",
         })
     }
 }
+
+// TODO: Need to change this piece of code later.
 export const updateProfilPicture = async (req, res) => {
     try {
         const { profil_picture } = req.body;
