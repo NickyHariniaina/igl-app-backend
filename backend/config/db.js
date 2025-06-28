@@ -9,15 +9,11 @@ config();
 
 export const sql = new Pool(
   {
-    connectionString: process.env.DATABASE_URL,
-    // host: process.env.HOST,
-    // database: process.env.DATABASE,
-    // port: process.env.DATABASE_PORT,
-    // password: process.env.PASSWORD,
-    // user: process.env.USER
-    ssl: { rejectUnauthorized: false },
-    host: 'db.neon.tech', // ou le domaine exact de ton Neon
-    port: 5432,
-    family: 4 // <-- 👈 Force IPv4
+    // connectionString: process.env.DATABASE_URL,
+    host: process.env.HOST,
+    database: process.env.DATABASE,
+    port: process.env.DATABASE_PORT,
+    password: process.env.PASSWORD,
+    user: process.env.USER
   }
 )
