@@ -9,11 +9,11 @@ config();
 
 export const sql = new Pool(
   {
-    // connectionString: process.env.DATABASE_URL,
-    host: process.env.HOST,
-    database: process.env.DATABASE,
-    port: process.env.DATABASE_PORT,
-    password: process.env.PASSWORD,
-    user: process.env.USER
+    connectionString: process.env.DATABASE_URL,
+    // host: process.env.HOST,
+    // database: process.env.DATABASE,
+    // port: process.env.DATABASE_PORT,
+    // password: process.env.PASSWORD,
+    // user: process.env.USER
   }
 )
