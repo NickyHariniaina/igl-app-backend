@@ -4,14 +4,15 @@ import { sql } from "../../config/db.js";
 // The app depends on this.
 
 export const createTable = async () => {
-    try {
-        const dbInit = await sql.query(`
+  try {
+    const dbInit = await sql.query(`
             CREATE TABLE IF NOT EXISTS "user" (
                 "id_user" serial primary key,
                 "username" varchar(200) not null,
                 "password_hashed" varchar(200) not null,
                 "profil_picture" varchar(250),
                 "created_at" timestamp default current_date,
+                "status" text,
                 "sexe" char(1) check("sexe" in ('F', 'M', 'O'))
             );
             CREATE TABLE IF NOT EXISTS "personality" (
@@ -35,8 +36,11 @@ export const createTable = async () => {
                 "privacy" varchar(250) default 'private' check ("privacy" in ('public', 'private'))
             );
         `);
-    } catch (error) {
-        console.log("There is an error initializing database 😶, One of the table may already be in the database...😊.");
-        console.error(error);
-    }
-}
+  } catch (error) {
+    console.log(
+      "There is an error initializing database 😶, One of the table may already be in the database...😊.",
+    );
+    console.error(error);
+  }
+};
+

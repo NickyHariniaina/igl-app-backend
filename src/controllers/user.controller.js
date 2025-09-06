@@ -6,6 +6,7 @@ import {
   getUsersQuery,
   updatePasswordQuery,
   updateProfilPictureQuery,
+  updateStatusQuery,
   updateUsernameQuery,
 } from "../services/utils/userQuery.js";
 
@@ -21,6 +22,23 @@ export const getUsers = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Internal server error",
+    });
+  }
+};
+
+export const updateStatus = async (req, res) => {
+  try {
+    const id = req.user.idUser;
+    console.log(id);
+    const { status } = req.body;
+    console.log(status);
+    await updateStatusQuery(status, id);
+    res.status(200).json({
+      message: "Status modified",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal Server Error",
     });
   }
 };
@@ -148,4 +166,3 @@ export const deleteUser = async (req, res) => {
     });
   }
 };
-
