@@ -7,7 +7,7 @@ import {
   updatePasswordQuery,
   updateProfilPictureQuery,
   updateUsernameQuery,
-} from "../services/utils/userQuery.js";
+} from "../servicesdb/utils/userQuery.js";
 
 // These controllers are easy to maintain.
 // They have the same structure, just depends on the query method.
