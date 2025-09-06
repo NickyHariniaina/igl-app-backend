@@ -28,8 +28,10 @@ export const getUsers = async (req, res) => {
 
 export const updateStatus = async (req, res) => {
   try {
-    const id = req.user.id;
-    const status = req.body.status;
+    const id = req.user.idUser;
+    console.log(id);
+    const { status } = req.body;
+    console.log(status);
     await updateStatusQuery(status, id);
     res.status(200).json({
       message: "Status modified",
