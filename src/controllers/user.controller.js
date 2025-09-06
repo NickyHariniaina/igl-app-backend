@@ -7,7 +7,7 @@ import {
   updatePasswordQuery,
   updateProfilPictureQuery,
   updateUsernameQuery,
-} from "../servicesdb/utils/userQuery.js";
+} from "../services/utils/userQuery.js";
 
 // These controllers are easy to maintain.
 // They have the same structure, just depends on the query method.
@@ -148,4 +148,3 @@ export const deleteUser = async (req, res) => {
     });
   }
 };
-
