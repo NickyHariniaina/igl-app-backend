@@ -3,7 +3,7 @@ import { config } from "dotenv";
 import express, { json } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
-import { createTable } from "./db/utils/createTable.js";
+import { createTable } from "./services/utils/createTable.js";
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
 import personalityRoutes from "./routes/personality.route.js";
