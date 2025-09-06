@@ -1,5 +1,14 @@
 import { Router } from "express";
-import { getPersonality, updateFavoriteColor, updateAttractedBy, updateColorScheme, updateHairLength, updateIsExtrovert, updateIsSingle, updateLanguage } from "../controllers/personalityControllers.js";
+import {
+  getPersonality,
+  updateFavoriteColor,
+  updateAttractedBy,
+  updateColorScheme,
+  updateHairLength,
+  updateIsExtrovert,
+  updateIsSingle,
+  updateLanguage,
+} from "../controllers/personality.controller.js";
 import { authenticateUser } from "../utils/authenticateUser.js";
 
 const router = Router();
@@ -17,3 +26,4 @@ router.put("/me/hair_length", authenticateUser, updateHairLength);
 router.put("/me/attracted_by", authenticateUser, updateAttractedBy);
 
 export default router;
+
